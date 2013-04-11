@@ -1,0 +1,36 @@
+[% INCLUDE 'doc-head-open.inc' %]
+ <title>Koha: MARC Record Checker</title>
+ <script type="text/javascript" src="[% PLUGIN_PATH %]/datepicker/js/datepicker.js"></script>
+ <link href="[% PLUGIN_PATH %]/datepicker/css/datepicker.css" rel="stylesheet" type="text/css" />
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body>
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/plugins/plugins-home.pl">Plugins</a> &rsaquo; MARC Record Checker</div>
+
+<div id="doc3">
+    <a href="http://bywatersolutions.com" target="_blank"><img src="[% PLUGIN_PATH %]/logo.png" /></a>
+    <h3>MARC Record Checker</h3>
+
+	<form method="get">
+        <input type="hidden" name="class" value="[% CLASS %]"/>
+        <input type="hidden" name="method" value="[% METHOD %]"/>
+        <input type="hidden" name="output" value="1"/>
+
+        <p>
+            <label for="biblionumber_starting">Start at biblionumber: </label>
+            <input type="text" name="biblionumber_starting"/>
+        </p>
+
+        <p>
+            <label for="biblionumber_ending">Stop at biblionumber: </label>
+            <input type="text" name="biblionumber_ending"/>
+        </p>
+
+		<p><input type="submit" value="Check records" /></p>
+
+	</form>
+
+[% INCLUDE 'intranet-bottom.inc' %]
