@@ -106,7 +106,7 @@ sub report_step2 {
         push(
             @results,
             {   data     => $row,
-                warnings => \@warnings,
+                warnings => grep( !/Subfield _9/, @warnings), # TODO: Fix MARC::Lint instead
             }
         );
     }
