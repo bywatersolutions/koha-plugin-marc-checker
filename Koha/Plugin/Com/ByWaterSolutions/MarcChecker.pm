@@ -69,7 +69,7 @@ sub report_step1 {
 
     my $template = $self->get_template( { file => 'report-step1.tt' } );
 
-    print $cgi->header();
+    print $cgi->header( -charset => 'utf-8' );
     print $template->output();
 }
 
@@ -115,7 +115,7 @@ sub report_step2 {
 
     $template->param( results => \@results, );
 
-    print $cgi->header();
+    print $cgi->header( -charset => 'utf-8' );
     print $template->output();
 }
 
