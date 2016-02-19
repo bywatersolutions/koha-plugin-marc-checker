@@ -101,14 +101,14 @@ sub report_step2 {
     while ( my $row = $sth->fetchrow_hashref() ) {
         my $marc = MARC::Record::new_from_usmarc( $row->{'marc'} );
         $lint->check_record($marc);
-        my @warnings = $lint->warnings;
+        my @warnings = grep ( !/Subfield _9/, $lint->warnings );
 
         push(
             @results,
             {   data     => $row,
-                warnings => grep( !/Subfield _9/, @warnings), # TODO: Fix MARC::Lint instead
+                warnings => @warnings
             }
-        );
+        ) if defined @warnings;
     }
 
     my $template = $self->get_template( { file => "report-step2.tt" } );
