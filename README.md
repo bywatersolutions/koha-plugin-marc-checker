@@ -14,6 +14,12 @@ From the [release page](https://github.com/bywatersolutions/koha-plugin-marc-che
 
 # Installing
 
+## Dependencies
+
+Ensure you have installed MARC::Lint and MARC::File::USMARC. If these libraries are not installed, the plugin will not show in your list of installed plugins.
+
+## Installation
+
 Koha's Plugin System allows for you to add additional tools and reports to Koha that are specific to your library. Plugins are installed by uploading KPZ ( Koha Plugin Zip ) packages. A KPZ file is just a zip file containing the perl files, template files, and any other files necessary to make the plugin work.
 
 The plugin system needs to be turned on by a system administrator.
