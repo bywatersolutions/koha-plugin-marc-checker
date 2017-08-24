@@ -14,7 +14,7 @@ use MARC::Lint;
 use MARC::File::USMARC;
 
 ## Here we set our plugin version
-our $VERSION = 1.01;
+our $VERSION = "{VERSION}";
 
 ## Here is our metadata, some keys are required, some are optional
 our $metadata = {
@@ -22,8 +22,8 @@ our $metadata = {
     author          => 'Kyle M Hall',
     description     => 'Checks your MARC records using MARC::Lint.',
     date_authored   => '2013-04-02',
-    date_updated    => '2013-04-02',
-    minimum_version => '3.1000000',
+    date_updated    => '1900-01-01',
+    minimum_version => '16.1100000',
     maximum_version => undef,
     version         => $VERSION,
 };
