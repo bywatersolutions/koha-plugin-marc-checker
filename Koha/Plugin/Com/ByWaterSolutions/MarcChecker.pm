@@ -108,7 +108,7 @@ sub report_step2 {
             {   data     => $row,
                 warnings => @warnings
             }
-        ) if defined @warnings;
+        ) if @warnings;
     }
 
     my $template = $self->get_template( { file => "report-step2.tt" } );
