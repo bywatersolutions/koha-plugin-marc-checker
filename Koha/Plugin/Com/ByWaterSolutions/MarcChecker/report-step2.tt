@@ -11,24 +11,25 @@
 <div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/plugins/plugins-home.pl">Plugins</a> &rsaquo; MARC Record Checker</div>
 
 <div id="doc3">
-	<h3>MARC record checker - results</h3>
+    <h3>MARC record checker - results ([% biblionumber_starting %] - [% biblionumber_ending %])</h3>
 
     <ul>
-
+        [% SET errors = 0 %]
         [% FOREACH r IN results %]
-
             <li>
                 <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% r.data.biblionumber %]">[% r.data.title %]</a>
                 <ul>
                     [% FOREACH w IN r.warnings %]
+                        [% SET errors = 1 %]
                         <li>[% w %]</li>
                     [% END %]
                 </ul>
             </li>
-
-
         [% END %]
-
     <ul>
+
+    [% UNLESS errors %]
+        No errors reported!
+    [% END %]
 
 [% INCLUDE 'intranet-bottom.inc' %]

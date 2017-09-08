@@ -55,7 +55,8 @@ sub report {
 
     unless ( $cgi->param('output') ) {
         $self->report_step1();
-    } else {
+    }
+    else {
         $self->report_step2();
     }
 }
@@ -84,7 +85,9 @@ sub report_step2 {
     my $biblionumber_starting = $cgi->param("biblionumber_starting");
     my $biblionumber_ending   = $cgi->param("biblionumber_ending");
 
-    ( $biblionumber_starting, $biblionumber_ending ) = ( $biblionumber_ending, $biblionumber_starting ) if ( $biblionumber_starting > $biblionumber_ending );
+    ( $biblionumber_starting, $biblionumber_ending ) =
+      ( $biblionumber_ending, $biblionumber_starting )
+      if ( $biblionumber_starting > $biblionumber_ending );
 
     my $query = "
         SELECT * 
@@ -99,13 +102,20 @@ sub report_step2 {
 
     my @results;
     while ( my $row = $sth->fetchrow_hashref() ) {
-        my $marc = MARC::Record::new_from_usmarc( $row->{'marc'} );
+        my $marcxml = $row->{marcxml};
+        my $marc    = eval {
+            MARC::Record::new_from_xml( $marcxml, "utf8",
+                C4::Context->preference('marcflavour') );
+        };
+        if ($@) { warn "Problem with $row->{biblionumber} : $@ \n$marcxml"; }
+
         $lint->check_record($marc);
         my @warnings = grep ( !/Subfield _9/, $lint->warnings );
 
         push(
             @results,
-            {   data     => $row,
+            {
+                data     => $row,
                 warnings => @warnings
             }
         ) if @warnings;
@@ -113,7 +123,11 @@ sub report_step2 {
 
     my $template = $self->get_template( { file => "report-step2.tt" } );
 
-    $template->param( results => \@results, );
+    $template->param(
+        results               => \@results,
+        biblionumber_starting => $biblionumber_starting,
+        biblionumber_ending   => $biblionumber_ending,
+    );
 
     print $cgi->header( -charset => 'utf-8' );
     print $template->output();
