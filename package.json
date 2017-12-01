@@ -1,6 +1,6 @@
 {
   "name": "koha-plugin-marc-checker",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "previous_version": "2.1.1",
   "description": "Koha MARC Checker Plugin",
   "devDependencies": {
