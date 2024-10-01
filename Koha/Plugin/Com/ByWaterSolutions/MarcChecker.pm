@@ -90,10 +90,10 @@ sub report_step2 {
       if ( $biblionumber_starting > $biblionumber_ending );
 
     my $query = "
-        SELECT * 
-        FROM biblioitems bi
-        LEFT JOIN biblio b ON bi.biblionumber = b.biblionumber
-        WHERE b.biblionumber >= ? AND b.biblionumber <= ?
+        SELECT biblionumber, metadata
+        FROM biblio_metadata
+        WHERE format = 'marcxml'
+          AND biblionumber >= ? AND biblionumber <= ?
     ";
     my $sth = $dbh->prepare($query);
     $sth->execute( $biblionumber_starting, $biblionumber_ending );
@@ -102,7 +102,7 @@ sub report_step2 {
 
     my @results;
     while ( my $row = $sth->fetchrow_hashref() ) {
-        my $marcxml = $row->{marcxml};
+        my $marcxml = $row->{metadata};
         my $marc    = eval {
             MARC::Record::new_from_xml( $marcxml, "utf8",
                 C4::Context->preference('marcflavour') );
