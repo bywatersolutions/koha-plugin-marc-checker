@@ -23,7 +23,7 @@ our $metadata = {
     description     => 'Checks your MARC records using MARC::Lint.',
     date_authored   => '2013-04-02',
     date_updated    => '1900-01-01',
-    minimum_version => '16.1100000',
+    minimum_version => '17.1100000',
     maximum_version => undef,
     version         => $VERSION,
 };
