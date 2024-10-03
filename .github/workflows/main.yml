@@ -110,6 +110,7 @@ jobs:
         sleep 60
         echo "3 MINUTES DONE"
         echo "WAKING UP"
+        docker exec koha-koha-1 bash -c 'cpanm MARC::Lint'
         echo "DOCKER LOGS"
         docker logs koha-koha-1 2>&1
         echo "/DOCKER LOGS"
